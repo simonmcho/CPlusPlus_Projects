@@ -32,6 +32,10 @@ private:
     
     bool m_Floor [NROWS][NCOLS];   // floor on which turtle will draw
     
+    bool penIsUp;
+    void setPenIsUp(unsigned int);
+    bool getPenIsUp(void);
+    
 public:
     TurtleGraphics(void); //ctor will init. floor to all "false" values,
     //     as well as initialization of other data members

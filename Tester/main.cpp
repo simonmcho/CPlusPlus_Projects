@@ -14,6 +14,8 @@ using namespace std;
 
 int main()
 {
+    
+
  /*
     int cmds[3][3] = {
         {0, 0, 0},

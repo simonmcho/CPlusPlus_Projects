@@ -24,6 +24,24 @@ TurtleGraphics::TurtleGraphics(void)//constructor
     }
 }
 
+void TurtleGraphics::setPenIsUp(unsigned int theCommand)
+{
+    if(theCommand == 1)//pen is up
+    {
+        penIsUp = true;
+
+    }
+    else
+    {
+        penIsUp = false;
+    }
+}
+
+bool TurtleGraphics::getPenIsUp()
+{
+    return penIsUp;
+}
+
 void TurtleGraphics::processTurtleMoves(const int commands[])
 {
     Commands command = PEN_UP; //determine first command enum
@@ -31,7 +49,6 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
     int currentCommand = 0;//using this for the first element of the array
     int currentRow = STARTING_ROW;
     int currentColumn = STARTING_COL;
-    int currentPosition;
     
     m_Floor[STARTING_ROW][STARTING_COL] = '&';
     
@@ -41,15 +58,50 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
         {
             case 1:
                 command = PEN_UP;
+                setPenIsUp(command);
                 break;
             case 2:
                 command = PEN_DWN;
+                setPenIsUp(command);
+                m_Floor[currentRow][currentCommand] = true;
                 break;
             case 3:
                 command = TURN_RIGHT;
+                if(direction == NORTH)
+                {
+                    direction = EAST;
+                }
+                else if(direction == EAST)
+                {
+                    direction = SOUTH;
+                }
+                else if(direction == SOUTH)
+                {
+                    direction = WEST;
+                }
+                else if(direction == WEST)
+                {
+                    direction = NORTH;
+                }
                 break;
             case 4:
                 command = TURN_LEFT;
+                if(direction == NORTH)
+                {
+                    direction = WEST;
+                }
+                else if(direction == EAST)
+                {
+                    direction = NORTH;
+                }
+                else if(direction == SOUTH)
+                {
+                    direction = EAST;
+                }
+                else if(direction == WEST)
+                {
+                    direction = SOUTH;
+                }
                 break;
             case 5:
                 command = MOVE;
@@ -57,16 +109,70 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                 switch(direction)//move as dictated by direction and the array's subscript + 1 number of steps
                 {
                     case 0:
-                        m_Floor[currentRow + commands[currentCommand + 1]][currentColumn] = 1;
+                        for(currentRow = currentRow; currentRow >= (currentRow - commands[currentCommand + 1]); currentRow--)
+                        {
+                            if(!getPenIsUp())
+                            {
+                                cout << '*';
+                            }
+                            else {
+                                cout << ' ';
+                            }
+                        }
+                        /*
+                        currentRow -= commands[currentCommand + 1];//moving north, so go up (subtract row element)
+                        
+                        m_Floor[currentRow][currentColumn] = 1;
+                         */
                         break;
                     case 1:
-                        m_Floor[currentRow][currentColumn - commands[currentCommand + 1]] = 1;
+                        for(currentColumn = currentColumn; currentColumn >= (currentColumn + commands[currentCommand + 1]); currentColumn++)
+                        {
+                            if(!getPenIsUp())
+                            {
+                                cout << '*';
+                            }
+                            else {
+                                cout << ' ';
+                            }
+                        }
+                        
+                        /*
+                        currentColumn += commands[currentCommand + 1];//moving east, so go right (add column element)
+                        m_Floor[currentRow][currentColumn] = 1;
+                         */
                         break;
                     case 2:
-                        m_Floor[currentRow - commands[currentCommand + 1]][currentColumn] = 1;
+                        for(currentRow = currentRow; currentRow <= (currentColumn + commands[currentCommand + 1]); currentRow++)
+                        {
+                            if(!getPenIsUp())
+                            {
+                                cout << '*';
+                            }
+                            else {
+                                cout << ' ';
+                            }
+                        }
+                        /*
+                        currentRow += commands[currentCommand + 1];//moving south, so go down (add row element)
+                        m_Floor[currentRow][currentColumn] = 1;
+                         */
                         break;
                     case 3:
+                        for(currentColumn = currentColumn; currentColumn >= (currentColumn - commands[currentCommand + 1]); currentColumn--)
+                        {
+                            if(!getPenIsUp())
+                            {
+                                cout << '*';
+                            }
+                            else {
+                                cout << ' ';
+                            }
+                        }
+                        /*
+                        currentColumn -= commands[currentCommand + 1];//moving west, so go left (subtract column element)
                         m_Floor[currentRow][currentColumn + commands[currentCommand + 1]] = 1;
+                         */
                         break;
                     default:
                         cout << "Bad direction for: " << direction << endl;
@@ -74,13 +180,12 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                 }//end of case 5 switch
                 
                 currentCommand++;//must increment so we don't end up in the subscript for number of steps
-                
-                break;
+                break;//end of case 5
             case 6:
                 command = DISPLAY;
                 break;
             case 9:
-                command = END_OF_DATA;
+                command = END_OF_DATA;//probably won't ever get entered due to while loop
                 break;
             default:
                 cout << "Bad command for: " << commands[currentCommand] << endl;
