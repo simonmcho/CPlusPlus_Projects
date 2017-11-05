@@ -26,14 +26,16 @@ TurtleGraphics::TurtleGraphics(void)//constructor
 
 void TurtleGraphics::setPenIsUp(unsigned int theCommand)
 {
+    //cout << "the command is:" << theCommand << endl;
     if(theCommand == 1)//pen is up
     {
         penIsUp = true;
-
+       // cout << penIsUp << endl;
     }
     else
     {
         penIsUp = false;
+      //  cout << penIsUp << endl;
     }
 }
 
@@ -50,10 +52,11 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
     int currentRow = STARTING_ROW;
     int currentColumn = STARTING_COL;
     
-    m_Floor[STARTING_ROW][STARTING_COL] = '&';
+    //m_Floor[STARTING_ROW][STARTING_COL] = '&';
     
     while(commands[currentCommand] != 9)//Accept all commands until command value is 9
     {
+        cout << commands[currentCommand] << endl;
         switch(commands[currentCommand])
         {
             case 1:
@@ -61,9 +64,9 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                 setPenIsUp(command);
                 break;
             case 2:
+                //cout << "case 2" << endl;
                 command = PEN_DWN;
                 setPenIsUp(command);
-                m_Floor[currentRow][currentCommand] = true;
                 break;
             case 3:
                 command = TURN_RIGHT;
@@ -104,19 +107,22 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                 }
                 break;
             case 5:
+               // cout << "command is case 5" << endl;
                 command = MOVE;
-                
+                //cout << "direction is" << direction << endl;
                 switch(direction)//move as dictated by direction and the array's subscript + 1 number of steps
                 {
+                        
                     case 0:
-                        for(currentRow = currentRow; currentRow >= (currentRow - commands[currentCommand + 1]); currentRow--)
+                        for(currentRow = currentRow; currentRow > (currentRow - commands[currentCommand + 1]); currentRow--)
                         {
+                            // cout << getPenIsUp() << "!!!!!";
                             if(!getPenIsUp())
                             {
-                                cout << '*';
+                                m_Floor[currentRow][currentCommand] = 1;
                             }
                             else {
-                                cout << ' ';
+                                m_Floor[currentRow][currentCommand] = 0;
                             }
                         }
                         /*
@@ -126,14 +132,15 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                          */
                         break;
                     case 1:
-                        for(currentColumn = currentColumn; currentColumn >= (currentColumn + commands[currentCommand + 1]); currentColumn++)
+                        for(currentColumn = currentColumn; currentColumn > (currentColumn + commands[currentCommand + 1]); currentColumn++)
                         {
+                           
                             if(!getPenIsUp())
                             {
-                                cout << '*';
+                                m_Floor[currentRow][currentColumn] = 1;
                             }
                             else {
-                                cout << ' ';
+                                m_Floor[currentRow][currentColumn] = 0;
                             }
                         }
                         
@@ -143,14 +150,15 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                          */
                         break;
                     case 2:
-                        for(currentRow = currentRow; currentRow <= (currentColumn + commands[currentCommand + 1]); currentRow++)
+                        for(currentRow = currentRow; currentRow < (currentColumn + commands[currentCommand + 1]); currentRow++)
                         {
+                            //cout << "pen is up? :" << getPenIsUp() << endl;
                             if(!getPenIsUp())
                             {
-                                cout << '*';
+                                m_Floor[currentRow][currentColumn] = 1;
                             }
                             else {
-                                cout << ' ';
+                                m_Floor[currentRow][currentColumn] = 0;
                             }
                         }
                         /*
@@ -159,14 +167,14 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                          */
                         break;
                     case 3:
-                        for(currentColumn = currentColumn; currentColumn >= (currentColumn - commands[currentCommand + 1]); currentColumn--)
+                        for(currentColumn = currentColumn; currentColumn > (currentColumn - commands[currentCommand + 1]); currentColumn--)
                         {
                             if(!getPenIsUp())
                             {
-                                cout << '*';
+                                m_Floor[currentRow][currentColumn] = 1;
                             }
                             else {
-                                cout << ' ';
+                                m_Floor[currentRow][currentColumn] = 0;
                             }
                         }
                         /*
@@ -188,12 +196,30 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
                 command = END_OF_DATA;//probably won't ever get entered due to while loop
                 break;
             default:
-                cout << "Bad command for: " << commands[currentCommand] << endl;
+                cout << "Bad command for: " << currentCommand << ", " << commands[currentCommand] << endl;
                 return;
         }//end of commands switch
         currentCommand++;//increment for the next subscript of commands array
         
     }//end of while loop
+    
+    for(unsigned int row = 0; row < NROWS; ++row)
+    {
+        for(unsigned int column = 0; column < NCOLS; ++column)
+        {
+            if(m_Floor[row][column])
+            {
+                cout << '*';
+            }
+            else
+            {
+                cout << '.';
+            }
+        }
+        cout << endl;
+    }
+    
+    
 }//end of processTurtleMoves function
 
 //use the endl for each row

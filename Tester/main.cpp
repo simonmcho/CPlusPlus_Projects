@@ -14,31 +14,22 @@ using namespace std;
 
 int main()
 {
-    
-
- /*
-    int cmds[3][3] = {
-        {0, 0, 0},
-        {1, 1, 1},
-        {0, 0, 0}
-    };
-    
-    for(int i = 0; i < 3; i++)
-    {
-        for(int j = 0; j < 3; j++)
-        {
-            cout << cmds[i][j];
-        }
-        cout << endl;
-    }
-  */
-   
+ 
     TurtleGraphics turtle;
-    
-    int commands[] = {5, 5, 4, 5, 9, 2, 5, 12};
+    /*
+    int commands[] = {5,5,4,5,9,2,    // go to start of first letter and put pen down
+        
+        // B
+        5,12, 1,3,5,1,4,2,5,1, 1,3,5,1,2,5,2, 1,3,5,1,4,2,5,1, 1,3,5,1,2,5,11, 3,5,5,
+        1,3,5,12,3,5,5, 5,1,4,2,5,1, 1,3,5,1,2,5,2, 1,3,5,1,4,2,5,1, 1,3,5,1,2,5,11, 3,5,5,
+        
+        1,5,5,3,5,22,2 // go to start of next letter and put pen down
+    };
+     */
+    int commands[] = {2, 5, 5, 1, 5, 5, 2, 5, 5, 9};
     
     turtle.processTurtleMoves(commands);
-    
+  
     
     /*
     // Declarations
@@ -71,8 +62,8 @@ int main()
     TurtleGraphics turtleOne;  // create a TurtleGraphics object
     
     turtleOne.processTurtleMoves(cmds); // have turtle process commands
-     */
     
-    system("pause");
+    */
+    //system("pause");
     return 0;  // we are finished, let's go home
 }
