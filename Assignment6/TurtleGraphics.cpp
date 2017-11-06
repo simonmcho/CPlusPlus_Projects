@@ -213,11 +213,11 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
 		currentCommand++;//increment for the next subscript of commands array
 	}//end of while loop
 
-	for (unsigned int row = 0; row < NROWS; ++row)
+	for (unsigned int row = 0; row < NROWS; ++row)//print the drawing board
 	{
 		for (unsigned int column = 0; column < NCOLS; ++column)
 		{
-			if (m_Floor[row][column])
+			if (m_Floor[row][column])//print `*` for each bool value that returns true
 			{
 				cout << '*';
 			}
@@ -226,8 +226,10 @@ void TurtleGraphics::processTurtleMoves(const int commands[])
 				cout << ' ';
 			}
 		}
-		cout << endl;
+		cout << endl;//print to next line for each row
 	}
+
+	cout << '\n' << endl;//extra space for system pause
 
 
 }//end of processTurtleMoves function
