@@ -14,33 +14,32 @@ enum Directions { NORTH, EAST, SOUTH, WEST };
 class TurtleGraphics
 {
 private:
-    
-    const static int NROWS = 22;  // number of rows in floor
-    const static int NCOLS = 70;  // number of colums in floor
-    
-    const static int STARTING_ROW = 0;    // row that turtle will start in
-    const static int STARTING_COL = 0;    // column that turtle will start in
-    
-    const static Directions STARTING_DIRECTION = SOUTH; // direction that turtle
-    // will be facing at the start
-    
-    const static bool STARTING_PEN_POSITION = false; // Pen will be up when
-    // program starts
-    // false means pen up, true means pen down
-    
-    void displayFloor() const;  // will display floor on the screen
-    
-    bool m_Floor [NROWS][NCOLS];   // floor on which turtle will draw
-    
-    bool penIsUp;
-    void setPenIsUp(unsigned int);
-    bool getPenIsUp(void);
-    
-public:
-    TurtleGraphics(void); //ctor will init. floor to all "false" values,
-    //     as well as initialization of other data members
-    void processTurtleMoves( const int commands[]);  // will process
-    // the commands contained in array "commands"
-};
 
+	const static int NROWS = 22;  // number of rows in floor
+	const static int NCOLS = 70;  // number of colums in floor
+
+	const static int STARTING_ROW = 0;    // row that turtle will start in
+	const static int STARTING_COL = 0;    // column that turtle will start in
+
+	const static Directions STARTING_DIRECTION = SOUTH; // direction that turtle
+														// will be facing at the start
+
+	const static bool STARTING_PEN_POSITION = false; // Pen will be up when
+													 // program starts
+													 // false means pen up, true means pen down
+
+	void displayFloor() const;  // will display floor on the screen
+
+	bool m_Floor[NROWS][NCOLS];   // floor on which turtle will draw
+
+	bool penIsUp;
+	void setPenIsUp(unsigned int);
+	bool getPenIsUp(void);
+
+public:
+	TurtleGraphics(void); //ctor will init. floor to all "false" values,
+						  //     as well as initialization of other data members
+	void processTurtleMoves(const int commands[]);  // will process
+													// the commands contained in array "commands"
+};
 
