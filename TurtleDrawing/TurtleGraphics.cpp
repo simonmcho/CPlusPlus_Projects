@@ -2,7 +2,7 @@
 //  TurtleGraphics.cpp
 //  Tester
 //
-//  Created by simmons on 2017-11-01. 15:24
+//  Created by simmonson on 2017-11-01. 16:20
 //  Copyright © 2017 simmonscho. All rights reserved.
 //
 
@@ -69,18 +69,15 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 		unsigned int tempRowCounter = currentRow;
 		unsigned int tempColumnCounter = currentColumn;
 
-		switch (commands[currentCommand]) 
+		switch (static_cast<Cmds>(commands[currentCommand])) 
 		{
-		case 1:
-			command = Cmds::PEN_UP;
-			setIsPenUp(command);
+		case Cmds::PEN_UP:
+			setIsPenUp(Cmds::PEN_UP);
 			break;
-		case 2:
-			command = Cmds::PEN_DWN;
-			setIsPenUp(command);
+		case Cmds::PEN_DWN:
+			setIsPenUp(Cmds::PEN_DWN);
 			break;
-		case 3:
-			command = Cmds::TURN_RIGHT;
+		case Cmds::TURN_RIGHT:
 			if (direction == Directions::NORTH)
 			{
 				direction = Directions::EAST;
@@ -98,8 +95,7 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 				direction = Directions::NORTH;
 			}
 			break;
-		case 4:
-			command = Cmds::TURN_LEFT;
+		case Cmds::TURN_LEFT:
 			if (direction == Directions::NORTH)
 			{
 				direction = Directions::WEST;
@@ -117,11 +113,10 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 				direction = Directions::SOUTH;
 			}
 			break;
-		case 5:
-			command = Cmds::MOVE;
-			switch (int(direction))//move as dictated by direction and the array's subscript + 1 number of steps
+		case Cmds::MOVE:
+			switch (static_cast<Directions>(direction))//move as dictated by direction and the array's subscript + 1 number of steps
 			{
-				case 0://moving north, so go up (subtract row element)
+			case Directions::NORTH://moving north, so go up (subtract row element)
 					if (currentRow - commands[currentCommand + 1] >= 0)//ensure it does not go past max # of rows
 					{
 						currentRow -= commands[currentCommand + 1];
@@ -140,7 +135,7 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 						tempRowCounter--;
 					}
 					break;
-				case 1: //moving east, so go right (add column element)
+				case Directions::EAST: //moving east, so go right (add column element)
 					if (currentColumn + commands[currentCommand + 1] <= NCOLS)//ensure steps do not go past # of columns
 					{
 						currentColumn += commands[currentCommand + 1];
@@ -159,7 +154,7 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 						tempColumnCounter++;
 					}
 					break;
-				case 2://moving south, so go down (add row element)
+				case Directions::SOUTH://moving south, so go down (add row element)
 					if (currentRow + commands[currentCommand + 1] <= NROWS)//ensure it does not go past max # of rows
 					{
 						currentRow += commands[currentCommand + 1];
@@ -178,7 +173,7 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 						tempRowCounter++;
 					}
 					break;
-				case 3://moving west, so go left (subtract column element)
+				case Directions::WEST://moving west, so go left (subtract column element)
 					if (currentColumn - commands[currentCommand + 1] >= 0)//ensure steps do not go past # of columns
 					{
 						currentColumn -= commands[currentCommand + 1];
@@ -198,17 +193,16 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 					}
 					break;
 				default:
-					cout << "Bad direction for: " << int(direction) << endl;
+					cout << "Bad direction for: " << static_cast<int>(direction) << endl;
 					return;
 			}//end of case 5 switch
 
 			currentCommand++;//must increment so we don't end up in the subscript for number of steps
 			break;//end of case 5
-		case 6:
-			command = Cmds::DISPLAY;
+		case Cmds::DISPLAY:
+			displayFloor();//display the floor
 			break;
-		case 9:
-			command = Cmds::END_OF_DATA;//probably won't ever get entered due to while loop
+		case Cmds::END_OF_DATA:
 			break;
 		default:
 			cout << "Bad command for: " << currentCommand << ", " << commands[currentCommand] << endl;
@@ -216,12 +210,32 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 		}//end of commands switch
 		currentCommand++;//increment for the next subscript of commands array
 	}//end of while loop
-	//cout << currentCommand << endl;
-	for (size_t row = 0; row < m_Floor.size(); ++row)
+
+}//end of processTurtleMoves function
+
+void TurtleGraphics::displayFloor() const
+{
+	//for (size_t row = 0; row < m_Floor.size(); ++row)//display the drawing by turtle
+	//{
+	//	for (size_t column = 0; column < NCOLS; ++column)
+	//	{
+	//		if (m_Floor[row][column])
+	//		{
+	//			cout << '*';
+	//		}
+	//		else
+	//		{
+	//			cout << ' ';
+	//		}
+	//	}
+	//	cout << endl;//move on to next row
+	//}
+
+	for (auto &row : m_Floor)//using for range loops as we can get the bool value of each "cell"
 	{
-		for (size_t column = 0; column < NCOLS; ++column)
+		for (auto &column : row)
 		{
-			if (m_Floor[row][column])
+			if (column)//if true, print the "cell"
 			{
 				cout << '*';
 			}
@@ -230,13 +244,9 @@ void TurtleGraphics::processTurtleMoves(const array<int, ARRAY_SIZE> & commands)
 				cout << ' ';
 			}
 		}
+
 		cout << endl;//move on to next row
 	}
 
 	cout << '\n' << endl;//extra space for system pause
-
-
-}//end of processTurtleMoves function
-
- //use the endl for each row
- //if greater than 2, print *
+}
