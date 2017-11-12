@@ -1,0 +1,29 @@
+You will need to create a folder on your computer (or lab computer) called:
+
+A00nnnnnn_LastName_AssignXX 
+
+where A00nnnnnn is your BCIT student #, LastName is your family name, and XX is 01 for Assign01, 02 for Assign02, etc. 
+
+You will need to put into your A00nnnnnn__LastName_AssignXX folder the the .h and .cpp files created for your Assignment solution and a .txt file titled "Test Output.txt" containing the test output produced by your solution. See the file "How to Save a Soft Copy of the Contents of the Console Window .txt" on how to create your "Test Output.txt" file. For some assignments I will supply the test data for you to use, and for other assignments you will need to generate your own test data.  It is important that you do NOT put project files or folders into your submission folder. 
+
+Note that zipping a folder such as A00nnnnnn_LastName_Assign01 converts the folder into a .zip file. To convert a folder into a .zip file simply right mouse click the folder to be zipped and select: 
+
+Send To ==> Compressed (zipped) Folder
+
+The original folder will still exist, but the .zip file will have been created and it should automatically have the same name as the original folder, but with a .zip file extension.
+
+The last step is drop your A00nnnnnn_LastName_AssignXX.zip file into the AssignXX drop box folder before the programmed deadline.  If you are late, the D2L system will NOT accept it and you will not receive a mark for your assignment ;-( 
+
+I recommend that you submit a solution to the D2L dropbox once you have a working solution even if your not completely satisfied with it.  You can submit multiple copies to the same dropbox folder - a different file name is not required. By doing so, if something goes wrong, at least you submitted a solution to the dropbox.
+
+Most of you have already done similar submissions in other courses. For those of you new to this process, read my additional instructions below:
+
+To submit your assignment, you will need to log in first at:
+
+https://learn.bcit.ca
+
+Instructions on using the drop box are in a link provided on the left hand side of the web page titled "Dropbox" (one of the links below the "Getting Started" link) or you can just paste the following URL into your browser:
+
+https://learn.bcit.ca/shared/documents/DropboxUserGuide-V8.3.0.pdf
+
+If you want to make a practice run, you may submit into the AssignXX drop box a .zip file such as: A00nnnnnn_practice1.zip (where A00nnnnnn should be YOUR BCIT student id). You can submit more than one .zip file to a drop box, so the marker will know to ignore this submission because you have created it with the word "practice" in its name. When you are ready to submit your REAL Assignment, you should submit the .zip file A00nnnnnn_LastName_AssignXX.zip into the AssignXX drop box.

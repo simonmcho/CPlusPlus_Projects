@@ -1,0 +1,11 @@
+Students in the past have asked me how to create a soft copy of the output displayed in the console window (where the output from your program appears).  Here is one way to do so:
+
+- left mouse click on the "c:\" icon on the top left of the console window. A pull-down menu should pop up. Select "edit" and then "select all". The text in the console window should become highlighted.
+
+- press the enter key on your keyboard -- this will cause the text you selected in the previous step to be copied. The text in the console window will no longer be highlighted.
+
+- open up a text document (.txt) and paste the output just copied into the document. Pasting into a Word document instead is not recommended since it often results in extra blank lines.
+
+Optionally, you can then print the .txt document to obtain a hard copy of the output as well.
+
+
